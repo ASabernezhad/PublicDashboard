@@ -2493,3 +2493,87 @@ html, body {
     padding: 6px 14px;
   }
 }
+/* ═══════ حذف کامل اسکرول‌بار بنفش ═══════ */
+
+/* اسکرول‌بار پیش‌فرض مرورگر رو کاملاً مخفی کن */
+::-webkit-scrollbar {
+  width: 0px !important;
+  height: 0px !important;
+  display: none !important;
+}
+
+::-webkit-scrollbar-track {
+  display: none !important;
+}
+
+::-webkit-scrollbar-thumb {
+  display: none !important;
+}
+
+/* برای فایرفاکس */
+* {
+  scrollbar-width: none !important;
+}
+
+html, body {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  overflow-x: hidden !important;
+}
+/* ═══════ حذف درخشش دور کارت‌ها ═══════ */
+
+/* حذف درخشش لبه کارت معرفی */
+.intro-card::before,
+.intro-card::after {
+  display: none !important;
+}
+
+/* حذف درخشش لبه کارت‌های درس */
+.card::after {
+  display: none !important;
+}
+
+/* حذف درخشش لبه کارت‌های استراتژی */
+.strategy-card::before,
+.strategy-card::after {
+  display: none !important;
+}
+
+/* حذف درخشش لبه کارت‌های ویژگی */
+.intro-feature::before,
+.intro-feature::after {
+  display: none !important;
+}
+
+/* حذف درخشش دکمه‌ها */
+button::after {
+  display: none !important;
+}
+
+/* حذف درخشش نوار پیشرفت */
+.bar-fill::after {
+  display: none !important;
+}
+
+/* حذف هر border اضافی */
+.card,
+.strategy-card,
+.intro-feature,
+.feature-item,
+.step-item,
+.calendar-panel,
+.chart-panel,
+.stats,
+.stat,
+.form-grid,
+.logs,
+.log-item {
+  border-color: rgba(148,163,184,.12) !important;
+}
+/* حذف box-shadowهای اضافی */
+.intro-card,
+.card,
+.strategy-card,
+.intro-feature {
+  box-shadow: 0 4px 12px rgba(0,0,0,.2) !important;
+}
