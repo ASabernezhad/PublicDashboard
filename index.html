@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>داشبورد تست</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#8b5cf6">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== صفحه معرفی و آموزش ===== -->
+  <div class="intro" id="intro">
+    <div class="intro-card glass">
+
+      <div class="intro-slide active" data-slide="0">
+        <div class="intro-icon">🎯</div>
+        <h1>به داشبورد تست خوش اومدی</h1>
+        <p class="intro-lead">یه داشبورد ساده و قدرتمند برای مدیریت تست‌هات</p>
+        <div class="intro-features">
+          <div class="intro-feature">
+            <span class="if-icon">📊</span>
+            <div><b>پیشرفت دقیق</b><p>ببین هر درس چقدر پیشرفت کرده</p></div>
+          </div>
+          <div class="intro-feature">
+            <span class="if-icon">🔥</span>
+            <div><b>استریک روزانه</b><p>روزهای پشت‌سرهم رو نگه دار</p></div>
+          </div>
+          <div class="intro-feature">
+            <span class="if-icon">📅</span>
+            <div><b>تقویم هوشمند</b><p>روزهای پرفعالیت رو ببین</p></div>
+          </div>
+          <div class="intro-feature">
+            <span class="if-icon">🎯</span>
+            <div><b>هدف‌گذاری دقیق</b><p>هدف روزانه‌ت رو بدون</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-slide" data-slide="1">
+        <div class="intro-icon">🧠</div>
+        <h1>استراتژی هدف‌گذاری</h1>
+        <p class="intro-lead">دو حالت برای هدف‌گذاری داری که هر کدوم برای یه شرایط خوبه</p>
+
+        <div class="strategy-card">
+          <div class="strategy-head">
+            <span class="strategy-badge">🔄 داینامیک</span>
+            <span class="strategy-tag">پیشنهاد ما</span>
+          </div>
+          <p class="strategy-desc">
+            <b>چطور کار می‌کنه؟</b> تو فقط تعداد کل تست هر درس رو وارد می‌کنی. سیستم خودش
+            محاسبه می‌کنه که با توجه به <b>روزهای باقی‌مانده تا هدف</b>، هر روز باید
+            چند تست از هر درس بزنی.
+          </p>
+          <p class="strategy-desc">
+            <b>مناسب برای:</b> وقتی هنوز برنامه‌ی مشخصی نداری و می‌خوای سیستم برات
+            برنامه‌ریزی کنه. هر روز که می‌گذره، هدف روزانه‌ت خودکار آپدیت می‌شه.
+          </p>
+          <div class="strategy-example">
+            💡 <b>مثال:</b> ۱۰۰۰ تست فیزیک داری و ۱۰۰ روز مونده → هر روز ۱۰ تست فیزیک
+          </div>
+        </div>
+
+        <div class="strategy-card">
+          <div class="strategy-head">
+            <span class="strategy-badge">✋ دستی</span>
+            <span class="strategy-tag">برای برنامه‌ریزی دقیق</span>
+          </div>
+          <p class="strategy-desc">
+            <b>چطور کار می‌کنه؟</b> خودت برای هر درس یه <b>هدف روزانه‌ی ثابت</b>
+            تعیین می‌کنی (مثلاً هر روز ۲۰ تست فیزیک). سیستم به جای تقسیم خودکار،
+            دقیقاً همون عدد رو به عنوان هدف روزانه در نظر می‌گیره.
+          </p>
+          <p class="strategy-desc">
+            <b>مناسب برای:</b> وقتی برنامه‌ی مطالعه‌ی مشخصی داری (مثلاً از مشاور
+            یا آزمون آزمایشی) و می‌خوای همون رو اجرا کنی.
+          </p>
+          <div class="strategy-example">
+            💡 <b>مثال:</b> هر روز ۲۰ تست فیزیک + ۱۵ تست شیمی + ۱۰ تست ریاضی
+          </div>
+        </div>
+
+        <div class="intro-tip">
+          ⚡ <b>نکته:</b> می‌تونی هر وقت خواستی از تنظیمات، حالت رو عوض کنی. نگران نباش!
+        </div>
+      </div>
+
+      <div class="intro-slide" data-slide="2">
+        <div class="intro-icon">🎨</div>
+        <h1>امکانات داشبورد</h1>
+        <p class="intro-lead">این‌ها چیزهایی‌ست که توی داشبورد می‌بینی</p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="fi-icon">⏳</div>
+            <div><b>شمارش معکوس</b><p>تعداد روزهای باقی‌مانده تا تاریخ هدفت رو نشون می‌ده</p></div>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">📈</div>
+            <div><b>نمودار پیشرفت</b><p>سهم هر درس از پیشرفتت رو به صورت گرافیکی می‌بینی</p></div>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">📅</div>
+            <div><b>تقویم هیت‌مپ</b><p>هر روز که تست می‌زنی، اون روز توی تقویم سبزتر می‌شه</p></div>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">🃏</div>
+            <div><b>کارت‌های درس</b><p>برای هر درس: هدف امروز، تعداد زده‌شده و وضعیتت رو نشون می‌ده</p></div>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">🔥</div>
+            <div><b>استریک روزانه</b><p>هر روز که حداقل یه تست بزنی، استریکت یکی زیاد می‌شه</p></div>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">📝</div>
+            <div><b>تاریخچه</b><p>همه‌ی تست‌هایی که زدی، با تاریخ و درس، اینجا ذخیره می‌شن</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-slide" data-slide="3">
+        <div class="intro-icon">🚀</div>
+        <h1>بریم شروع کنیم!</h1>
+        <p class="intro-lead">فقط ۳ قدم تا شروع مسیرت مونده</p>
+
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-num">۱</div>
+            <div><b>اسمت رو وارد کن</b><p>که داشبوردت شخصی بشه</p></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">۲</div>
+            <div><b>تاریخ هدفت رو مشخص کن</b><p>تاریخی که می‌خوای تا اون موقع آماده باشی</p></div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">۳</div>
+            <div><b>درس‌هات رو اضافه کن</b><p>با تعداد کل تست و حالت هدف‌گذاری دلخواهت</p></div>
+          </div>
+        </div>
+
+        <div class="intro-tip">
+          💾 <b>مهم:</b> همه‌ی اطلاعاتت توی مرورگر خودت ذخیره می‌شه.
+          هیچ‌کس بهش دسترسی نداره. فقط حواست باشه مرورگرت رو پاک نکنی!
+        </div>
+      </div>
+
+      <div class="intro-nav">
+        <button class="intro-prev" id="intro-prev" style="visibility:hidden;">→ قبلی</button>
+        <div class="intro-dots" id="intro-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <button class="intro-next" id="intro-next">بعدی ←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== صفحه راه‌اندازی اولیه ===== -->
+  <div class="onboarding" id="onboarding" style="display:none;">
+    <div class="onboarding-card glass">
+      <h1>🎯 به داشبورد تست خوش اومدی</h1>
+      
+      <div class="onb-step" id="onb-step-1">
+        <label>اسمت چیه؟</label>
+        <input type="text" id="onb-name" placeholder="مثلاً علی">
+      </div>
+
+      <!-- تاریخ هدف: منوی کشویی سریع -->
+      <div class="onb-step" id="onb-step-2">
+        <label>تاریخ هدفت کیه؟</label>
+<div class="date-select-row">
+  <div class="date-select-item">
+    <label class="ds-label">روز</label>
+    <input type="text" inputmode="numeric" id="onb-day" placeholder="۲۹">
+  </div>
+  <div class="date-select-item">
+    <label class="ds-label">ماه</label>
+    <select id="onb-month"></select>
+  </div>
+  <div class="date-select-item">
+    <label class="ds-label">سال</label>
+    <input type="text" inputmode="numeric" id="onb-year" placeholder="۱۴۰۵">
+  </div>
+</div>
+        <p class="onb-hint">تاریخی که می‌خوای تا اون موقع آماده باشی</p>
+      </div>
+
+      <div class="onb-step" id="onb-step-3">
+        <label>حالت هدف‌گذاری:</label>
+        <div class="mode-selector">
+          <label class="mode-option">
+            <input type="radio" name="goal-mode" value="dynamic" checked>
+            <span>🔄 داینامیک (سیستم خودش تقسیم می‌کنه)</span>
+          </label>
+          <label class="mode-option">
+            <input type="radio" name="goal-mode" value="manual">
+            <span>✋ دستی (خودم هدف روزانه رو می‌ذارم)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="onb-step" id="onb-step-4">
+        <label>درس‌هات:</label>
+        <div id="onb-lessons"></div>
+        <button class="onb-add-btn" id="onb-add-lesson">➕ افزودن درس</button>
+      </div>
+
+      <button class="onb-submit" id="onb-submit">🚀 شروع کنیم</button>
+    </div>
+  </div>
+
+  <!-- ===== داشبورد اصلی ===== -->
+  <div class="wrap" id="main-app" style="display:none;">
+    <div class="head">
+      <div>
+        <h1 id="app-title">🎯 داشبورد تست</h1>
+        <div class="sub" id="todayLabel"></div>
+      </div>
+      <div class="head-actions">
+        <button class="icon-btn" id="btn-settings" title="تنظیمات">⚙️</button>
+        <div class="badge-streak" title="روزهای پشت سرهم">
+          <span class="fire">🔥</span>
+          <div class="n" id="streakBig">۰</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="countdown glass">
+      <div class="big" id="cd-days">--</div>
+      <div class="lbl" id="cd-label">روز تا هدف</div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="section-title">📊 نمودار پیشرفت</div>
+    <div class="chart-panel glass">
+      <canvas id="progressChart" height="220"></canvas>
+    </div>
+
+    <div class="section-title">📅 تقویم تست‌ها</div>
+    <div class="calendar-panel glass">
+      <div class="cal-head">
+        <button id="cal-prev">◀</button>
+        <div class="cal-title" id="cal-title"></div>
+        <button id="cal-next">▶</button>
+      </div>
+      <div class="cal-weekdays">
+        <span>ش</span><span>ی</span><span>د</span><span>س</span><span>چ</span><span>پ</span><span>ج</span>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <div class="cal-legend">
+        <span>کمتر</span>
+        <div class="legend-cell heat-0"></div>
+        <div class="legend-cell heat-1"></div>
+        <div class="legend-cell heat-2"></div>
+        <div class="legend-cell heat-3"></div>
+        <div class="legend-cell heat-4"></div>
+        <span>بیشتر</span>
+      </div>
+    </div>
+
+    <div class="section-title">📚 درس‌ها</div>
+    <div class="cards" id="cards"></div>
+
+    <div class="section-title">✍️ ثبت تست</div>
+    <div class="form-grid glass">
+      <div>
+        <label>درس</label>
+        <select id="f-lesson"></select>
+      </div>
+      <div>
+        <label>تعداد تست</label>
+        <input type="number" id="f-done" min="1" placeholder="مثلاً ۳۰">
+      </div>
+      <div>
+        <label>تاریخ</label>
+        <input type="text" id="f-date" readonly style="text-align:center;">
+      </div>
+      <div class="form-actions">
+        <button id="btn-add">➕ ثبت</button>
+        <button id="btn-export" class="btn-export">📥</button>
+        <label class="btn-import">
+          📤
+          <input type="file" accept=".csv" hidden id="f-import">
+        </label>
+      </div>
+    </div>
+
+    <div class="section-title">📝 تاریخچه</div>
+    <div class="logs" id="logs"></div>
+  </div>
+
+  <!-- ===== مودال تنظیمات ===== -->
+  <div class="modal" id="settings-modal" style="display:none;">
+    <div class="modal-content glass">
+      <div class="modal-head">
+        <h2>⚙️ تنظیمات</h2>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label>اسمت</label>
+        <input type="text" id="set-name">
+
+        <!-- تاریخ هدف: منوی کشویی سریع -->
+        <label>تاریخ هدف</label>
+<div class="date-select-row">
+  <div class="date-select-item">
+    <label class="ds-label">روز</label>
+    <input type="text" inputmode="numeric" id="set-day">
+  </div>
+  <div class="date-select-item">
+    <label class="ds-label">ماه</label>
+    <select id="set-month"></select>
+  </div>
+  <div class="date-select-item">
+    <label class="ds-label">سال</label>
+    <input type="text" inputmode="numeric" id="set-year">
+  </div>
+</div>
+
+        <label>حالت هدف‌گذاری</label>
+        <div class="mode-selector">
+          <label class="mode-option">
+            <input type="radio" name="set-goal-mode" value="dynamic">
+            <span>🔄 داینامیک</span>
+          </label>
+          <label class="mode-option">
+            <input type="radio" name="set-goal-mode" value="manual">
+            <span>✋ دستی</span>
+          </label>
+        </div>
+
+        <label>درس‌ها</label>
+        <div id="set-lessons"></div>
+        <button class="onb-add-btn" id="set-add-lesson">➕ افزودن درس</button>
+        <button class="onb-submit" id="set-save">💾 ذخیره</button>
+        <button class="danger-btn" id="set-reset">🗑️ پاک کردن همه داده‌ها</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">✅ ثبت شد</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
