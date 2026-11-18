@@ -837,7 +837,101 @@
       showOnboarding();
     }
   }
+  // ====== افکت لمس سه‌بعدی + بازخورد لمسی (مخصوص موبایل) ======
+  function initTouchEffects() {
+    // اگه دستگاه لمسی نبود، اجرا نکن
+    var isTouch = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window;
+    if (!isTouch) return;
 
+    // ===== بازخورد لرزشی =====
+    function haptic(ms) {
+      if (navigator.vibrate) {
+        try { navigator.vibrate(ms || 10); } catch(e) {}
+      }
+    }
+
+    // ===== ۱. چرخش و درخشش کارت‌ها با لمس =====
+    var tiltTargets = document.querySelectorAll('.card, .stat');
+    
+    tiltTargets.forEach(function(card) {
+      if (card.dataset.touchBound === 'true') return;
+      card.dataset.touchBound = 'true';
+
+      // وقتی انگشت روی کارت گذاشته شد
+      card.addEventListener('touchstart', function(e) {
+        var touch = e.touches[0];
+        var rect = card.getBoundingClientRect();
+        var x = touch.clientX - rect.left;
+        var y = touch.clientY - rect.top;
+        
+        // موقعیت درخشش
+        card.style.setProperty('--mouse-x', x + 'px');
+        card.style.setProperty('--mouse-y', y + 'px');
+        
+        // شروع انیمیشن نرم
+        card.style.transition = 'transform 0.1s ease-out';
+        
+        haptic(8);
+      }, { passive: true });
+
+      // وقتی انگشت حرکت کرد
+      card.addEventListener('touchmove', function(e) {
+        var touch = e.touches[0];
+        var rect = card.getBoundingClientRect();
+        var x = touch.clientX - rect.left;
+        var y = touch.clientY - rect.top;
+        var centerX = rect.width / 2;
+        var centerY = rect.height / 2;
+        
+        // محدود کردن به داخل کارت
+        if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+        
+        // محاسبه زاویه (ظریف‌تر از دسکتاپ)
+        var rotateX = ((y - centerY) / centerY) * -6;
+        var rotateY = ((x - centerX) / centerX) * 6;
+        
+        card.style.transform = 
+          'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(0.98)';
+        
+        card.style.setProperty('--mouse-x', x + 'px');
+        card.style.setProperty('--mouse-y', y + 'px');
+        
+        // درخشش قوی‌تر بشه
+        card.classList.add('touch-active');
+      }, { passive: true });
+
+      // وقتی انگشت برداشته شد
+      function resetTilt() {
+        card.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+        card.style.transform = '';
+        card.classList.remove('touch-active');
+      }
+
+      card.addEventListener('touchend', resetTilt, { passive: true });
+      card.addEventListener('touchcancel', resetTilt, { passive: true });
+    });
+
+    // ===== ۲. بازخورد لمسی روی دکمه‌ها =====
+    var buttons = document.querySelectorAll('button, .icon-btn, .cal-day:not(.empty)');
+    
+    buttons.forEach(function(btn) {
+      if (btn.dataset.touchBound === 'true') return;
+      btn.dataset.touchBound = 'true';
+      
+      btn.addEventListener('touchstart', function() {
+        haptic(12);
+        btn.classList.add('touch-press');
+      }, { passive: true });
+      
+      btn.addEventListener('touchend', function() {
+        btn.classList.remove('touch-press');
+      }, { passive: true });
+      
+      btn.addEventListener('touchcancel', function() {
+        btn.classList.remove('touch-press');
+      }, { passive: true });
+    });
+  }
   // ====== Init ======
   function init(){
     loadConfig();
@@ -951,12 +1045,14 @@
       document.getElementById('intro').style.display = 'flex';
       showIntroSlide(0);
     }
+        setTimeout(initTouchEffects, 60);
   }
 
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+        setTimeout(initTouchEffects, 100);
         // سال فوتر
     var footerYear = document.getElementById('footer-year');
     if(footerYear) {

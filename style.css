@@ -2629,3 +2629,109 @@ html, body {
     margin-top: 10px;
   }
 }
+/* ===== آیکون‌های SVG ===== */
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.icon-btn:hover svg {
+  transform: rotate(90deg);
+}
+
+.badge-streak .fire-svg {
+  width: 22px;
+  height: 22px;
+  color: #f87171;
+  filter: drop-shadow(0 0 6px rgba(239,68,68,.6));
+  animation: fireGlow 2s ease-in-out infinite;
+}
+
+@keyframes fireGlow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(239,68,68,.5)); }
+  50% { filter: drop-shadow(0 0 12px rgba(239,68,68,.9)); }
+}
+/* ═══════════════════════════════════════════ */
+/* ═══════ افکت‌های لمسی (موبایل) ═══════ */
+/* ═══════════════════════════════════════════ */
+
+/* ===== فعال شدن درخشش موقع لمس ===== */
+.card.touch-active::after,
+.stat.touch-active::after {
+  opacity: 1;
+  background: radial-gradient(
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(139,92,246,.4),
+    transparent 40%
+  );
+}
+
+/* ===== فشردن دکمه‌ها ===== */
+.touch-press {
+  transform: scale(0.94) !important;
+  filter: brightness(1.2);
+  transition: transform 0.1s ease, filter 0.1s ease !important;
+}
+
+/* ===== حذف هاور در دستگاه‌های لمسی (برای جلوگیری از گیر کردن) ===== */
+@media (hover: none) {
+  .card:hover,
+  .stat:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .card:hover::after,
+  .stat:hover::after {
+    opacity: 0;
+  }
+  
+  /* ولی افکت لمس فعال باشه */
+  .card.touch-active,
+  .stat.touch-active {
+    box-shadow: 0 10px 30px rgba(139,92,246,.4);
+  }
+}
+
+/* ===== تقویم: پالس روی روز انتخاب‌شده ===== */
+@keyframes dayPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.cal-day:not(.empty):active {
+  animation: dayPulse 0.3s ease;
+}
+
+/* ===== حذف هایلایت آبی مرورگر روی لمس ===== */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== بازخورد لمسی روی لاگ‌ها ===== */
+.log-item:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* ===== بازخورد روی کارت‌های معرفی ===== */
+.intro-feature:active,
+.strategy-card:active,
+.feature-item:active,
+.step-item:active {
+  transform: scale(0.97) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* ===== دکمه‌های ناوبری معرفی ===== */
+.intro-next:active,
+.intro-prev:active {
+  transform: scale(0.95) !important;
+}
+
+/* ===== دکمه‌های تقویم ===== */
+.cal-head button:active {
+  transform: scale(0.92) !important;
+}
