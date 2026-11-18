@@ -814,7 +814,7 @@ button:active { transform: scale(.97); }
 /* ===== صفحه معرفی ===== */
 .intro {
   position: fixed; inset: 0; z-index: 80;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: flex-start; justify-content: center;
   padding: 20px; overflow-y: auto;
   background: rgba(7,11,26,.92); backdrop-filter: blur(12px);
 }
@@ -822,10 +822,9 @@ button:active { transform: scale(.97); }
 .intro-card {
   max-width: 680px; width: 100%;
   padding: 36px 32px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--line);
   position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .intro-slide {
@@ -1791,20 +1790,7 @@ h1 {
   left: 100%;
 }
 
-.strategy-badge {
-  position: relative;
-}
 
-.strategy-badge::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  right: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), transparent);
-  border-radius: 2px;
-}
 
 /* ===== لیست ویژگی‌های اسلاید ۳ ===== */
 .intro-slide.active .feature-item {
@@ -1989,23 +1975,6 @@ h1 {
   text-shadow: 0 0 30px rgba(139,92,246,.3);
 }
 
-/* ===== اسکرول‌بار سفارشی برای کارت معرفی ===== */
-.intro-card::-webkit-scrollbar {
-  width: 6px;
-}
-
-.intro-card::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.intro-card::-webkit-scrollbar-thumb {
-  background: rgba(139,92,246,.4);
-  border-radius: 10px;
-}
-
-.intro-card::-webkit-scrollbar-thumb:hover {
-  background: rgba(139,92,246,.7);
-}
 /* ===== جلوگیری از اسکرول افقی ===== */
 html, body {
   overflow-x: hidden !important;
@@ -2150,5 +2119,199 @@ html, body {
 @media (max-width: 480px) {
   .intro-icon {
     font-size: 52px !important;
+  }
+}
+.strategy-card {
+  border-color: rgba(148,163,184,.15) !important;
+}
+.strategy-example {
+  border-right-color: rgba(139,92,246,.3) !important;
+}
+/* حذف کادر کارت معرفی */
+.intro-card {
+  border: none !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5) !important;
+}
+/* حذف درخشش لبه کارت معرفی */
+.intro-card::before,
+.intro-card::after {
+  display: none !important;
+}
+/* ═══════════════════════════════════════════ */
+/* ═══════ امضا (فقط فوتر و معرفی) ═══════ */
+/* ═══════════════════════════════════════════ */
+
+/* انیمیشن‌ها */
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes shinePass {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+@keyframes iconSpin {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(-15deg) scale(1.1); }
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.3); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.15); }
+}
+
+/* ===== فوتر ===== */
+.footer {
+  margin-top: 50px;
+  padding: 28px 16px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--cyan), transparent);
+  animation: shinePass 5s ease-in-out infinite;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted);
+  animation: floatSoft 5s ease-in-out infinite;
+}
+
+.footer-content > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer-content b {
+  background: linear-gradient(90deg, #c4b5fd, #67e8f9, #c4b5fd);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
+  animation: gradientMove 3s linear infinite;
+  padding: 0 2px;
+  transition: all 0.3s ease;
+}
+
+.footer-content b:hover {
+  filter: drop-shadow(0 0 10px rgba(139,92,246,.8));
+}
+
+.footer-dot {
+  color: rgba(139,92,246,.5);
+  animation: floatSoft 2s ease-in-out infinite;
+}
+
+.footer-heart {
+  color: #f87171;
+  animation: heartBeat 1.5s ease-in-out infinite;
+  display: inline-block;
+  filter: drop-shadow(0 0 6px rgba(239,68,68,.6));
+}
+
+/* ===== امضای صفحه معرفی ===== */
+.intro-signature {
+  margin-top: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.sig-line {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--cyan), transparent);
+  margin: 0 auto 14px auto;
+  border-radius: 2px;
+  animation: floatSoft 2s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(139,92,246,.5);
+}
+
+.sig-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, rgba(139,92,246,.12), rgba(34,211,238,.08));
+  border: 1px solid rgba(139,92,246,.3);
+  border-radius: 99px;
+  font-size: 11.5px;
+  color: var(--muted);
+  position: relative;
+  overflow: hidden;
+  animation: floatSoft 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.sig-text::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+  animation: shinePass 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.sig-text:hover {
+  background: linear-gradient(135deg, rgba(139,92,246,.25), rgba(34,211,238,.15));
+  border-color: rgba(139,92,246,.6);
+  box-shadow: 0 6px 20px rgba(139,92,246,.3);
+  transform: translateY(-2px) scale(1.05);
+  animation-play-state: paused;
+}
+
+.sig-text b {
+  background: linear-gradient(90deg, #c4b5fd, #67e8f9, #c4b5fd);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
+  animation: gradientMove 3s linear infinite;
+}
+
+.sig-emoji {
+  font-size: 13px;
+  display: inline-block;
+  animation: iconSpin 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px rgba(139,92,246,.6));
+}
+
+/* ===== موبایل ===== */
+@media (max-width: 720px) {
+  .footer-content {
+    font-size: 10.5px;
+    gap: 6px;
+  }
+  
+  .sig-text {
+    font-size: 10.5px;
+    padding: 6px 14px;
   }
 }

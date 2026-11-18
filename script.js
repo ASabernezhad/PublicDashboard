@@ -945,5 +945,12 @@
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+        // سال فوتر
+    var footerYear = document.getElementById('footer-year');
+    if(footerYear) {
+      var now = new Date();
+      var jNow = gToJ(now.getFullYear(), now.getMonth() + 1, now.getDate());
+      footerYear.textContent = '© ' + faDigits(jNow.jy);
+    }
   }
 })();
