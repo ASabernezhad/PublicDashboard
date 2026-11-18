@@ -812,6 +812,18 @@
         nextBtn.classList.remove('finish');
       }
     }
+    
+    // اسکرول کارت معرفی به بالا
+    var introCard = document.querySelector('.intro-card');
+    if (introCard) {
+      introCard.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // اسکرول صفحه‌ی معرفی به بالا (برای موبایل)
+    var introEl = document.getElementById('intro');
+    if (introEl) {
+      introEl.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   function finishIntro(){

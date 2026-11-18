@@ -814,9 +814,14 @@ button:active { transform: scale(.97); }
 /* ===== صفحه معرفی ===== */
 .intro {
   position: fixed; inset: 0; z-index: 80;
-  display: flex; align-items: flex-start; justify-content: center;
-  padding: 20px; overflow-y: auto;
-  background: rgba(7,11,26,.92); backdrop-filter: blur(12px);
+  display: flex; 
+  align-items: flex-start; 
+  justify-content: center;
+  padding: 20px; 
+  overflow-y: auto;
+  background: rgba(7,11,26,.92); 
+  backdrop-filter: blur(12px);
+  -webkit-overflow-scrolling: touch;
 }
 
 .intro-card {
@@ -824,7 +829,10 @@ button:active { transform: scale(.97); }
   padding: 36px 32px;
   border: 1px solid var(--line);
   position: relative;
-  overflow-y: visible;
+  overflow-y: auto;
+  max-height: 90vh;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 .intro-slide {
@@ -2493,33 +2501,6 @@ html, body {
     padding: 6px 14px;
   }
 }
-/* ═══════ حذف کامل اسکرول‌بار بنفش ═══════ */
-
-/* اسکرول‌بار پیش‌فرض مرورگر رو کاملاً مخفی کن */
-::-webkit-scrollbar {
-  width: 0px !important;
-  height: 0px !important;
-  display: none !important;
-}
-
-::-webkit-scrollbar-track {
-  display: none !important;
-}
-
-::-webkit-scrollbar-thumb {
-  display: none !important;
-}
-
-/* برای فایرفاکس */
-* {
-  scrollbar-width: none !important;
-}
-
-html, body {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-  overflow-x: hidden !important;
-}
 /* ═══════ حذف درخشش دور کارت‌ها ═══════ */
 
 /* حذف درخشش لبه کارت معرفی */
@@ -2576,4 +2557,75 @@ button::after {
 .strategy-card,
 .intro-feature {
   box-shadow: 0 4px 12px rgba(0,0,0,.2) !important;
+}
+/* ═══════ اسکرول‌بار نازک و ملایم ═══════ */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148,163,184,.25);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148,163,184,.5);
+}
+
+/* برای فایرفاکس */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148,163,184,.25) transparent;
+}
+
+html, body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+/* ===== اصلاح نمایش اسلاید آخر روی موبایل ===== */
+@media (max-width: 720px) {
+  .intro {
+    align-items: flex-start;
+    padding: 12px 10px;
+  }
+  
+  .intro-card {
+    margin: 10px auto;
+    padding: 24px 18px;
+  }
+  
+  .intro-slide[data-slide="3"] {
+    padding-bottom: 10px;
+  }
+  
+  .intro-slide[data-slide="3"] .steps-list {
+    margin-bottom: 12px;
+  }
+  
+  .intro-slide[data-slide="3"] .step-item {
+    padding: 10px;
+  }
+  
+  .intro-slide[data-slide="3"] .step-item b {
+    font-size: 12px;
+  }
+  
+  .intro-slide[data-slide="3"] .step-item p {
+    font-size: 10.5px;
+  }
+  
+  .intro-slide[data-slide="3"] .intro-tip {
+    font-size: 10.5px;
+    padding: 8px 10px;
+    margin-top: 8px;
+  }
+  
+  .intro-slide[data-slide="3"] .intro-signature {
+    margin-top: 10px;
+  }
 }
