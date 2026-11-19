@@ -2735,3 +2735,103 @@ html, body {
 .cal-head button:active {
   transform: scale(0.92) !important;
 }
+/* ═══════════════════════════════════════════ */
+/* ═══════ شمارش معکوس ضربان‌دار (۱۰ روز آخر) ═══════ */
+/* ═══════════════════════════════════════════ */
+
+/* حالت هشدار: قرمز/نارنجی */
+.countdown.urgent {
+  border-color: rgba(239,68,68,.6) !important;
+  box-shadow: 0 0 30px rgba(239,68,68,.2), inset 0 0 40px rgba(239,68,68,.05) !important;
+  animation: urgentGlow 2s ease-in-out infinite;
+}
+
+.countdown.urgent .big {
+  background: linear-gradient(90deg, #fca5a5, #f87171, #ef4444, #f87171, #fca5a5) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  animation: urgentShine 3s linear infinite, heartbeat 1.4s ease-in-out infinite !important;
+}
+
+.countdown.urgent .lbl {
+  color: #fca5a5 !important;
+}
+
+/* هشدار خیلی نزدیک (≤ ۳ روز): ضربان تندتر */
+.countdown.urgent.critical .big {
+  animation: urgentShine 3s linear infinite, heartbeatFast 0.9s ease-in-out infinite !important;
+  filter: drop-shadow(0 0 20px rgba(239,68,68,.7));
+}
+
+.countdown.urgent.critical {
+  animation: urgentGlowFast 1s ease-in-out infinite;
+  border-color: rgba(239,68,68,.85) !important;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.08); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.06); }
+  70% { transform: scale(1); }
+}
+
+@keyframes heartbeatFast {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.1); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.08); }
+  70% { transform: scale(1); }
+}
+
+@keyframes urgentShine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes urgentGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(239,68,68,.15), inset 0 0 40px rgba(239,68,68,.03);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(239,68,68,.35), inset 0 0 60px rgba(239,68,68,.08);
+  }
+}
+
+@keyframes urgentGlowFast {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(239,68,68,.25), inset 0 0 40px rgba(239,68,68,.05);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(239,68,68,.5), inset 0 0 70px rgba(239,68,68,.12);
+  }
+}
+
+/* پیام هشدار زیر شمارش */
+.urgent-msg {
+  margin-top: 12px;
+  padding: 8px 14px;
+  display: inline-block;
+  background: rgba(239,68,68,.12);
+  border: 1px solid rgba(239,68,68,.4);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fca5a5;
+  animation: urgentMsgPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes urgentMsgPulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.04); opacity: 1; }
+}
+
+/* روی موبایل کوچیک‌تر */
+@media (max-width: 480px) {
+  .urgent-msg {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}

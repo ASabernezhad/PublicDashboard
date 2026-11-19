@@ -318,14 +318,62 @@
   }
 
   // ====== رندر ======
-  function renderCountdown(){
-    var d = remainingDays();
-    document.getElementById('cd-days').textContent = fmtFa(d);
-    var endJ = CONFIG.endDate;
-    var monthNames = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
-    document.getElementById('cd-label').textContent =
-      'روز تا ' + fmtFa(endJ.jd) + ' ' + monthNames[endJ.jm - 1] + ' ' + faDigits(endJ.jy);
+function renderCountdown(){
+  var d = remainingDays();
+  var cdDays = document.getElementById('cd-days');
+  var cdLabel = document.getElementById('cd-label');
+  var cdBox = cdDays ? cdDays.closest('.countdown') : null;
+
+  cdDays.textContent = fmtFa(d);
+
+  var endJ = CONFIG.endDate;
+  var monthNames = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+  var endText = 'روز تا ' + fmtFa(endJ.jd) + ' ' + monthNames[endJ.jm - 1] + ' ' + faDigits(endJ.jy);
+
+  // ===== حالت ضربان‌دار (۱۰ روز آخر) =====
+  if (cdBox) {
+    var msgEl = cdBox.querySelector('.urgent-msg');
+
+    if (d <= 10 && d > 0) {
+      // فعال کردن حالت هشدار
+      cdBox.classList.add('urgent');
+      cdBox.classList.toggle('critical', d <= 3);
+
+      // پیام خاص
+      var msg;
+      if (d <= 3) {
+        msg = '🔥 فقط ' + fmtFa(d) + ' روز! وقت جمع‌بندیه';
+      } else if (d <= 7) {
+        msg = '⏰ ' + fmtFa(d) + ' روز مونده — جدی بگیر!';
+      } else {
+        msg = '⚠️ ' + fmtFa(d) + ' روز تا پایان — حواست باشه';
+      }
+
+      if (!msgEl) {
+        msgEl = document.createElement('div');
+        msgEl.className = 'urgent-msg';
+        cdBox.appendChild(msgEl);
+      }
+      msgEl.textContent = msg;
+    } else if (d === 0) {
+      // امروز آخرین روزه
+      cdBox.classList.add('urgent', 'critical');
+      if (!msgEl) {
+        msgEl = document.createElement('div');
+        msgEl.className = 'urgent-msg';
+        cdBox.appendChild(msgEl);
+      }
+      msgEl.textContent = '🎯 امروز آخرین روزه! تمام تلاشت رو بکن';
+      endText = '⏳ امروز آخرین روز';
+    } else {
+      // حالت عادی
+      cdBox.classList.remove('urgent', 'critical');
+      if (msgEl) msgEl.remove();
+    }
   }
+
+  cdLabel.textContent = endText;
+}
 
   function renderStats(){
     var rem = totalRemaining();
@@ -517,6 +565,7 @@
     }catch(e){}
 
     document.getElementById('streakBig').textContent = fmtFa(calcCurrentStreak());
+    try{ setTimeout(celebrateDailyGoal, 800); } catch(e){}
   }
 
   // ====== Toast ======
@@ -528,7 +577,58 @@
     t.classList.add('show');
     setTimeout(function(){ t.classList.remove('show'); }, 2000);
   }
+// ===== جشن وقتی به هدف روزانه رسیدی =====
+function celebrateDailyGoal() {
+  var today = todayStr();
 
+  // اگه امروز قبلاً جشن گرفتیم، دوباره نگیر
+  var celebratedKey = 'celebrated_' + today;
+  if (localStorage.getItem(celebratedKey) === '1') return;
+
+  // چک کن آیا هدف همه‌ی درس‌ها انجام شده؟
+  var status = statusPerLesson();
+  var allDone = true;
+  var totalTarget = 0;
+  var totalDone = 0;
+
+  CONFIG.lessons.forEach(function(l) {
+    var s = status[l.id];
+    if (!s) return;
+    totalTarget += s.target;
+    totalDone += s.done;
+    if (s.diff < 0) allDone = false; // هنوز عقبه
+  });
+
+  // اگه هدف کل صفره (مثلاً روز تعطیل)، جشن نگیر
+  if (totalTarget <= 0) return;
+
+  // اگه همه‌ی درس‌ها به هدف رسیدن → جشن!
+  if (allDone && typeof confetti === 'function') {
+    // ثبت که امروز جشن گرفتیم
+    try { localStorage.setItem(celebratedKey, '1'); } catch(e) {}
+
+    // 🎊 کانفتی از دو طرف
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { x: 0.2, y: 0.7 },
+      colors: ['#8b5cf6', '#22d3ee', '#22c55e', '#facc15', '#f87171']
+    });
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { x: 0.8, y: 0.7 },
+      colors: ['#8b5cf6', '#22d3ee', '#22c55e', '#facc15', '#f87171']
+    });
+
+    // پیام شخصی
+    var name = CONFIG.name ? CONFIG.name + ' ' : '';
+    setTimeout(function() {
+      toast('🎉 ' + name + 'به هدف امروز رسیدی! عالی بود 🏆', 
+        'linear-gradient(135deg,#22c55e,#16a34a)');
+    }, 300);
+  }
+}
   // ====== اکشن‌ها ======
   function addLog(){
     var sel = document.getElementById('f-lesson');
@@ -550,6 +650,8 @@
     inp.value = '';
     renderAll();
     toast('✅ ثبت شد');
+        // چک کن اگه هدف روزانه کامل شد، جشن بگیر
+    setTimeout(celebrateDailyGoal, 500);
   }
 
   function deleteLog(id){
@@ -897,12 +999,10 @@
       card.addEventListener('touchend', resetTilt, { passive: true });
       card.addEventListener('touchcancel', resetTilt, { passive: true });
     });
-
   // ====== Init ======
   function init(){
     loadConfig();
     loadLogs();
-
     var now = new Date();
     var nowJ = gToJ(now.getFullYear(), now.getMonth() + 1, now.getDate());
     currentCalJY = nowJ.jy;
@@ -953,6 +1053,7 @@
 
     // Settings
     var settingsBtn = document.getElementById('btn-settings');
+    
     if(settingsBtn) settingsBtn.addEventListener('click', openSettings);
     var modalClose = document.getElementById('modal-close');
     if(modalClose) modalClose.addEventListener('click', function(){
