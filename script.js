@@ -837,13 +837,6 @@
       showOnboarding();
     }
   }
-  // ====== افکت لمس سه‌بعدی + بازخورد لمسی (مخصوص موبایل) ======
-  function initTouchEffects() {
-    // اگه دستگاه لمسی نبود، اجرا نکن
-    var isTouch = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window;
-    if (!isTouch) return;
-
-
     // ===== ۱. چرخش و درخشش کارت‌ها با لمس =====
     var tiltTargets = document.querySelectorAll('.card, .stat');
     
@@ -1018,14 +1011,12 @@
       document.getElementById('intro').style.display = 'flex';
       showIntroSlide(0);
     }
-        setTimeout(initTouchEffects, 60);
   }
 
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
-        setTimeout(initTouchEffects, 100);
         // سال فوتر
     var footerYear = document.getElementById('footer-year');
     if(footerYear) {
