@@ -843,12 +843,6 @@
     var isTouch = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window;
     if (!isTouch) return;
 
-    // ===== بازخورد لرزشی =====
-    function haptic(ms) {
-      if (navigator.vibrate) {
-        try { navigator.vibrate(ms || 10); } catch(e) {}
-      }
-    }
 
     // ===== ۱. چرخش و درخشش کارت‌ها با لمس =====
     var tiltTargets = document.querySelectorAll('.card, .stat');
@@ -911,27 +905,6 @@
       card.addEventListener('touchcancel', resetTilt, { passive: true });
     });
 
-    // ===== ۲. بازخورد لمسی روی دکمه‌ها =====
-    var buttons = document.querySelectorAll('button, .icon-btn, .cal-day:not(.empty)');
-    
-    buttons.forEach(function(btn) {
-      if (btn.dataset.touchBound === 'true') return;
-      btn.dataset.touchBound = 'true';
-      
-      btn.addEventListener('touchstart', function() {
-        haptic(12);
-        btn.classList.add('touch-press');
-      }, { passive: true });
-      
-      btn.addEventListener('touchend', function() {
-        btn.classList.remove('touch-press');
-      }, { passive: true });
-      
-      btn.addEventListener('touchcancel', function() {
-        btn.classList.remove('touch-press');
-      }, { passive: true });
-    });
-  }
   // ====== Init ======
   function init(){
     loadConfig();
